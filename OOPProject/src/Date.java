@@ -5,6 +5,37 @@ public class Date {
 	private int month;
 	private int year;
 	
+	public Date()
+	{
+		if(!isValid())
+		{
+			Date.getToday();
+		}
+	}
+	public int getDay() {
+		return day;
+	}
+
+	public int getMonth() {
+		return month;
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setDay(int day) {
+		this.day = day;
+	}
+
+	public void setMonth(int month) {
+		this.month = month;
+	}
+	
+	public void setYear(int year) {
+		this.year = year;
+	}
+
 	public boolean isAfterThan(Date other)
 	{
 		if(other.year>year)
@@ -14,7 +45,6 @@ public class Date {
 		if((other.year==year) && (other.month==month) && (other.day>day))
 			return true;
 		return false;
-			
 	}
 	
 	public boolean isBeforeThan(Date other)
@@ -31,6 +61,21 @@ public class Date {
 	public boolean isEqualsWith(Date other)
 	{
 		if((other.year==year) && (other.month==month) && (other.day==day))
+			return true;
+		return false;
+	}
+	
+	public boolean isValid( ) 
+	{
+		int maxDay = 30;
+		if( month == 2 && year % 4 == 0 ) {
+			maxDay = 29;
+			if( year % 100 == 0 && year % 400 != 0 )
+				maxDay = 28;
+		}
+		if( (month <= 7 && month % 2 == 1) || (month >= 8 && month % 2 == 0 ) )
+			maxDay = 31;
+		if( day >=1 && day <= maxDay && month >= 1 && month <= 12 )
 			return true;
 		return false;
 	}

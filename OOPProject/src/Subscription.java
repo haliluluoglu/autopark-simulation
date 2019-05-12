@@ -31,7 +31,7 @@ public class Subscription {
 	}
 
 	public String getPlate() {
-		return plate;
+		return plate;	
 	}
 
 	public void setPlate(String plate) {
@@ -40,11 +40,9 @@ public class Subscription {
 	
 	public boolean isValid()
 	{
-		Date aDate = new Date();
-		if(begin<aDate.getToday())
-			
+		if((end.getYear()-begin.getYear()>0) || (end.getMonth()-begin.getMonth()>0) || (end.getDay()-begin.getDay()>0))
+			return true;
+		return false;
 	}
 	
-	
-
 }

@@ -2,8 +2,8 @@
 public class Vehicle implements RegularVehicle, SubscribedVehicle, OfficialVehicle{
 	private String plate;
 	private Subscription subscriptions;
+	
 	public Vehicle(String plate, Subscription subscriptions) {
-		super();
 		this.plate = plate;
 		this.subscriptions = subscriptions;
 	}
@@ -20,6 +20,9 @@ public class Vehicle implements RegularVehicle, SubscribedVehicle, OfficialVehic
 		this.subscriptions = subscriptions;
 	}
 	
-	
+	public boolean isSpecial()
+	{
+		return false;
+	}
 
 }
