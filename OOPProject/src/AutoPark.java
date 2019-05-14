@@ -1,7 +1,8 @@
+import java.util.ArrayList;
 
 public class AutoPark {
 	private SubscribedVehicle subscribedVehicles[];
-	private ParkRecord parkRecords[];
+	private ArrayList<ParkRecord> parkRecords;
 	private double hourlyFee,incomeDaily;
 	private int capacity;
 	
@@ -9,19 +10,17 @@ public class AutoPark {
 	public AutoPark(double hourlyFee, int capacity) {
 		this.capacity=capacity;
 		subscribedVehicles = new SubscribedVehicle[capacity];
-		parkRecords = new ParkRecord[capacity];
+		parkRecords = new ArrayList<ParkRecord>();
 		this.hourlyFee=hourlyFee;		
 	}
 	
 	public SubscribedVehicle[] getSubscribedVehicles() {
 		return subscribedVehicles;
 	}
-
-
-	public ParkRecord[] getParkRecords() {
+	
+	public ArrayList<ParkRecord> getParkRecords() {
 		return parkRecords;
 	}
-
 
 	public double getHourlyFee() {
 		return hourlyFee;
@@ -42,11 +41,9 @@ public class AutoPark {
 		this.subscribedVehicles = subscribedVehicles;
 	}
 
-
-	public void setParkRecords(ParkRecord[] parkRecords) {
+	public void setParkRecords(ArrayList<ParkRecord> parkRecords) {
 		this.parkRecords = parkRecords;
 	}
-
 
 	public void setHourlyFee(double hourlyFee) {
 		this.hourlyFee = hourlyFee;
@@ -77,18 +74,74 @@ public class AutoPark {
 	
 	public boolean isParked(String plate)
 	{
-		
 		if(searchVehicle(plate) !=null)
-		{
+		{	
 			for(ParkRecord aParkRecord : parkRecords)
 			{
-				if(aParkRecord != null)
+				if(aParkRecord.getVehicle().getPlate() !=null)
 				{
-					
+					return true;
 				}
 			}
 		}
 		return false;
 	}
 	
+	public boolean addVehicle(SubscribedVehicle aVehicle)
+	{
+		if(this.capacity > 0)
+		{
+			if(searchVehicle(aVehicle.getPlate())==null)
+			{
+				subscribedVehicles[this.capacity]=aVehicle;
+				this.capacity--;
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean vehicleEnters(String plate, Time enter, boolean isOfficial)
+	{
+		if(!isParked(plate))
+		{
+			Vehicle aVehicle = searchVehicle(plate);
+			ParkRecord aRecord = new ParkRecord(enter,aVehicle);
+			if(!isOfficial)
+			{
+				parkRecords.add(aRecord);
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean vehicleExits(String plate, Time exit)
+	{
+		if(!isParked(plate))
+		{
+			Vehicle aVehicle = searchVehicle(plate);
+			ParkRecord aRecord = new ParkRecord(exit);
+			aRecord.setVehicle(aVehicle);
+			
+			if(aVehicle.isOfficial())
+			{
+				this.hourlyFee=0;
+				this.incomeDaily=0;
+			}
+			else
+			{
+					int temp = aRecord.getParkingDuration();
+					this.incomeDaily += this.hourlyFee * temp;
+					parkRecords.remove(aRecord);
+			}
+			return true;
+		}
+		return false;	
+	}
+	
+	private void enlargeArray()
+	{
+		this.capacity++;
+	}
 }
