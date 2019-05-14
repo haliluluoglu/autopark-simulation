@@ -1,28 +1,6 @@
 
-public class Vehicle implements RegularVehicle, SubscribedVehicle, OfficialVehicle{
-	private String plate;
-	private Subscription subscriptions;
-	
-	public Vehicle(String plate, Subscription subscriptions) {
-		this.plate = plate;
-		this.subscriptions = subscriptions;
-	}
-	public String getPlate() {
-		return plate;
-	}
-	public Subscription getSubscriptions() {
-		return subscriptions;
-	}
-	public void setPlate(String plate) {
-		this.plate = plate;
-	}
-	public void setSubscriptions(Subscription subscriptions) {
-		this.subscriptions = subscriptions;
-	}
-	
-	public boolean isSpecial()
-	{
-		return false;
-	}
-
+public interface Vehicle {
+	public String getPlate();
+	public Subscription getSubscriptions();
+	public boolean isOfficial();
 }

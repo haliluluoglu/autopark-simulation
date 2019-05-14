@@ -23,6 +23,10 @@ public class Time {
 		this.minute = minute;
 	}
 
+	public int getDifference(Time other)
+	{
+		return other.hour-this.hour;
+	}
 	
 
 }

@@ -4,10 +4,9 @@ public class Subscription {
 	private SubscribedVehicle vehicle;
 	private String plate;
 	
-	public Subscription(Date end, Date begin, SubscribedVehicle vehicle, String plate) {
+	public Subscription(Date end, Date begin, String plate) {
 		this.end = end;
 		this.begin = begin;
-		this.vehicle = vehicle;
 		this.plate=plate;
 	}
 	
