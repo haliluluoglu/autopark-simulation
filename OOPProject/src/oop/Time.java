@@ -1,3 +1,4 @@
+package oop;
 
 public class Time {
 	private int hour,minute;

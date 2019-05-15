@@ -1,3 +1,4 @@
+package oop;
 import java.util.ArrayList;
 
 public class AutoPark {
@@ -9,7 +10,7 @@ public class AutoPark {
 	
 	public AutoPark(double hourlyFee, int capacity) {
 		this.capacity=capacity;
-		subscribedVehicles = new SubscribedVehicle[capacity];
+		subscribedVehicles = new SubscribedVehicle[this.capacity];
 		parkRecords = new ArrayList<ParkRecord>();
 		this.hourlyFee=hourlyFee;		
 	}
@@ -140,6 +141,7 @@ public class AutoPark {
 		return false;	
 	}
 	
+	@SuppressWarnings("unused")
 	private void enlargeArray()
 	{
 		this.capacity++;

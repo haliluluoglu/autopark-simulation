@@ -1,10 +1,12 @@
+package oop;
 
-public class SubscribedVehicle implements Vehicle{
+public class OfficialVehicle implements Vehicle{
+	
 	private String plate;
 	private Subscription subscriptions;
-	private boolean official=false;
+	private boolean official=true;
 	
-	public SubscribedVehicle(String plate, Subscription subscriptions, boolean official) {
+	public OfficialVehicle(String plate, Subscription subscriptions, boolean official) {
 		this.plate = plate;
 		this.subscriptions = subscriptions;
 		this.official = official;

@@ -1,24 +1,43 @@
+package oop;
 
 public class Subscription {
 	private Date end,begin;
 	private SubscribedVehicle vehicle;
 	private String plate;
+
 	
 	public Subscription(Date end, Date begin, String plate) {
-		this.end = end;
-		this.begin = begin;
-		this.plate=plate;
+		if((end!=null) && (end!=null) && (plate!=null))
+		{
+			this.plate=plate;
+			this.end = end;
+			this.begin = begin;
+			vehicle =  new SubscribedVehicle(plate, this, false);
+		}
 	}
 	
 	public Date getEnd() {
 		return end;
 	}
+	
 	public Date getBegin() {
 		return begin;
 	}
+	
 	public SubscribedVehicle getVehicle() {
 		return vehicle;
 	}
+	
+	public String getPlate()
+	{
+		return plate;
+	}
+	
+	public void setPlate(String plate)
+	{
+		this.plate=plate;
+	}
+	
 	public void setEnd(Date end) {
 		this.end = end;
 	}
@@ -27,14 +46,6 @@ public class Subscription {
 	}
 	public void setVehicle(SubscribedVehicle vehicle) {
 		this.vehicle = vehicle;
-	}
-
-	public String getPlate() {
-		return plate;	
-	}
-
-	public void setPlate(String plate) {
-		this.plate = plate;
 	}
 	
 	public boolean isValid()

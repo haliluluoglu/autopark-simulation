@@ -1,3 +1,4 @@
+package oop;
 
 public interface Vehicle {
 	public String getPlate();

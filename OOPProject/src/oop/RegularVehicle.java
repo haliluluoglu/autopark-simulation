@@ -1,3 +1,4 @@
+package oop;
 
 public class RegularVehicle implements Vehicle{
 	private String plate;
