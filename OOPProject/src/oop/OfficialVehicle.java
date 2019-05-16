@@ -6,10 +6,10 @@ public class OfficialVehicle implements Vehicle{
 	private Subscription subscriptions;
 	private boolean official=true;
 	
-	public OfficialVehicle(String plate, Subscription subscriptions, boolean official) {
+	public OfficialVehicle(String plate) {
 		this.plate = plate;
-		this.subscriptions = subscriptions;
-		this.official = official;
+		Date end = new Date(11, 11, 3000);
+		subscriptions = new Subscription(end, Date.getToday(), this.plate);
 	}
 
 	public String getPlate() {

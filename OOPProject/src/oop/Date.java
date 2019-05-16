@@ -4,11 +4,11 @@ package oop;
 import java.util.Calendar;
 
 public class Date {
-	private Integer day;
-	private Integer month;
-	private Integer year;
+	private int day;
+	private int month;
+	private int year;
 	
-	/*public Date(int day, int month, int year)
+	public Date(int day, int month, int year)
 	{
 		int maxDay = 30;
 		if( month == 2 && year % 4 == 0 ) {
@@ -24,14 +24,8 @@ public class Date {
 			this.month=month;
 			this.year=year;
 		}
-	}*/
-	
-	public Date(Integer day, Integer month, Integer year) {
-		this.day=day;
-		this.month=month;
-		this.year=year;
 	}
-	
+
 	public int getDay() {
 		return day;
 	}

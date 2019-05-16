@@ -4,9 +4,8 @@ public class RegularVehicle implements Vehicle{
 	private String plate;
 	private boolean official=false;
 	
-	public RegularVehicle(String plate, boolean isOfficial) {
+	public RegularVehicle(String plate) {
 		this.plate = plate;
-		this.official = isOfficial;
 	}
 
 	public String getPlate() {

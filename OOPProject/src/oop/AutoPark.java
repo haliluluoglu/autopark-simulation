@@ -1,8 +1,9 @@
 package oop;
 import java.util.ArrayList;
 
+
 public class AutoPark {
-	private SubscribedVehicle subscribedVehicles[];
+	private ArrayList<SubscribedVehicle> subscribedVehicles;
 	private ArrayList<ParkRecord> parkRecords;
 	private double hourlyFee,incomeDaily;
 	private int capacity;
@@ -10,15 +11,15 @@ public class AutoPark {
 	
 	public AutoPark(double hourlyFee, int capacity) {
 		this.capacity=capacity;
-		subscribedVehicles = new SubscribedVehicle[this.capacity];
+		subscribedVehicles = new ArrayList<SubscribedVehicle>();
 		parkRecords = new ArrayList<ParkRecord>();
 		this.hourlyFee=hourlyFee;		
 	}
-	
-	public SubscribedVehicle[] getSubscribedVehicles() {
+		
+	public ArrayList<SubscribedVehicle> getSubscribedVehicles() {
 		return subscribedVehicles;
 	}
-	
+
 	public ArrayList<ParkRecord> getParkRecords() {
 		return parkRecords;
 	}
@@ -37,8 +38,7 @@ public class AutoPark {
 		return capacity;
 	}
 
-
-	public void setSubscribedVehicles(SubscribedVehicle[] subscribedVehicles) {
+	public void setSubscribedVehicles(ArrayList<SubscribedVehicle> subscribedVehicles) {
 		this.subscribedVehicles = subscribedVehicles;
 	}
 
@@ -63,11 +63,17 @@ public class AutoPark {
 
 	public SubscribedVehicle searchVehicle(String plate)
 	{
-		for(SubscribedVehicle aVehicle : subscribedVehicles)
+		//Matcher m1 = Pattern.compile("\\d\\d [A-Z][A-Z] \\d\\d").matcher(plate);
+		//Matcher m2 = Pattern.compile("\\d\\d [A-Z][A-Z][A-Z] \\d\\d").matcher(plate);
+		//Matcher m3 = Pattern.compile("\\d\\d [A-Z][A-Z] \\d\\d\\d").matcher(plate);
+		//Matcher m4 = Pattern.compile("\\d\\d [A-Z][A-Z][A-Z] \\d\\d\\d").matcher(plate);
+
+		if((plate!=null)  && (plate.length()>=8 &&	 (plate.length()<=10)) )
 		{
-			if(aVehicle.getPlate()==plate)
+			for(SubscribedVehicle aVehicle : subscribedVehicles)
 			{
-				return aVehicle;
+				if(aVehicle.getPlate()==plate)
+					return aVehicle;				
 			}
 		}
 		return null;
@@ -75,11 +81,11 @@ public class AutoPark {
 	
 	public boolean isParked(String plate)
 	{
-		if(searchVehicle(plate) !=null)
+		if(plate != null)
 		{	
 			for(ParkRecord aParkRecord : parkRecords)
 			{
-				if(aParkRecord.getVehicle().getPlate() !=null)
+				if(aParkRecord.getVehicle().getPlate().compareTo(plate) == 0)
 				{
 					return true;
 				}
@@ -94,7 +100,8 @@ public class AutoPark {
 		{
 			if(searchVehicle(aVehicle.getPlate())==null)
 			{
-				subscribedVehicles[this.capacity]=aVehicle;
+				
+				subscribedVehicles.add(aVehicle);
 				this.capacity--;
 				return true;
 			}
@@ -104,41 +111,77 @@ public class AutoPark {
 	
 	public boolean vehicleEnters(String plate, Time enter, boolean isOfficial)
 	{
-		if(!isParked(plate))
+		if(plate != null && enter != null)
 		{
-			Vehicle aVehicle = searchVehicle(plate);
-			ParkRecord aRecord = new ParkRecord(enter,aVehicle);
-			if(!isOfficial)
+			if(!isParked(plate))
 			{
-				parkRecords.add(aRecord);
+				SubscribedVehicle subVehicle = searchVehicle(plate);
+				
+				if(subVehicle != null)
+				{
+					ParkRecord aRecord = new ParkRecord(enter, subVehicle);
+					parkRecords.add(aRecord);
+					return true;
+				}
+				else
+				{
+					if(isOfficial)
+					{
+						OfficialVehicle offVehicle = new OfficialVehicle(plate);
+						ParkRecord aRecord = new ParkRecord(enter, offVehicle);
+						parkRecords.add(aRecord);
+						return true;
+					}
+					else
+					{
+						RegularVehicle regVehicle = new RegularVehicle(plate);
+						ParkRecord aRecord = new ParkRecord(enter, regVehicle);
+						parkRecords.add(aRecord);
+						return true;
+					}
+				}
 			}
-			return true;
 		}
 		return false;
 	}
 	
 	public boolean vehicleExits(String plate, Time exit)
 	{
-		if(!isParked(plate))
+		if(plate != null && exit != null)
 		{
-			Vehicle aVehicle = searchVehicle(plate);
-			ParkRecord aRecord = new ParkRecord(exit);
-			aRecord.setVehicle(aVehicle);
-			
-			if(aVehicle.isOfficial())
-			{
-				this.hourlyFee=0;
-				this.incomeDaily=0;
+			if(isParked(plate))
+			{	
+				for(ParkRecord aRecord : parkRecords)
+				{
+					if(aRecord.getVehicle().getPlate().compareTo(plate) == 0 )
+					{	
+						aRecord.setExitTime(exit);
+						if(aRecord.getVehicle().getSubscriptions() != null)
+						{
+							if(aRecord.getVehicle().getSubscriptions().isValid() == true)
+							{
+								if(aRecord.getVehicle().isOfficial() == false)
+								{
+									incomeDaily += Math.abs((hourlyFee * aRecord.getParkingDuration()));
+								}
+								else
+								{
+									this.incomeDaily=0;
+									this.hourlyFee=0;
+								}
+							}
+						}
+						else
+						{
+							incomeDaily += Math.abs((hourlyFee * aRecord.getParkingDuration()));
+						}
+						parkRecords.remove(aRecord);
+						return true;
+					}
+				}
 			}
-			else
-			{
-					int temp = aRecord.getParkingDuration();
-					this.incomeDaily += this.hourlyFee * temp;
-					parkRecords.remove(aRecord);
-			}
-			return true;
 		}
-		return false;	
+		return false;
 	}
 	
 	@SuppressWarnings("unused")

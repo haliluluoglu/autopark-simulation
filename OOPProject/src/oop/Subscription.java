@@ -7,12 +7,13 @@ public class Subscription {
 
 	
 	public Subscription(Date end, Date begin, String plate) {
-		if((end!=null) && (end!=null) && (plate!=null))
+		if((end!=null) && (end!=null) && (plate!=null) )
 		{
-			this.plate=plate;
-			this.end = end;
-			this.begin = begin;
-			vehicle =  new SubscribedVehicle(plate, this, false);
+				this.plate=plate;
+				this.end = end;
+				this.begin = begin;
+				vehicle =  new SubscribedVehicle(plate, this, false);
+		
 		}
 	}
 	
@@ -50,9 +51,7 @@ public class Subscription {
 	
 	public boolean isValid()
 	{
-		if((end.getYear()-begin.getYear()>0) || (end.getMonth()-begin.getMonth()>0) || (end.getDay()-begin.getDay()>0))
-			return true;
-		return false;
+		return Date.getToday().isAfterThan(end);
 	}
 	
 }
