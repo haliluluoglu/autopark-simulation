@@ -189,4 +189,12 @@ public class AutoPark {
 	{
 		this.capacity++;
 	}
+
+	@Override
+	public String toString() {
+		return "AutoPark [subscribedVehicles=" + subscribedVehicles + ", parkRecords=" + parkRecords + ", hourlyFee="
+				+ hourlyFee + ", incomeDaily=" + incomeDaily + ", capacity=" + capacity + "]";
+	}
+	
+	
 }
