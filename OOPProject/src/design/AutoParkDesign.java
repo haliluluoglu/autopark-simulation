@@ -12,6 +12,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 import oop.AutoPark;
 import oop.Date;
@@ -29,6 +30,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.swing.JPanel;
 
 public class AutoParkDesign {
@@ -36,6 +40,8 @@ public class AutoParkDesign {
 	private JFrame frame;
 	private JTextField carPlateText;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private final ButtonGroup buttonGroup2 = new ButtonGroup();
+	private boolean[] labelEmpty = new boolean[5];
 
 	/**
 	 * Launch the application.
@@ -57,7 +63,16 @@ public class AutoParkDesign {
 	 * Create the application.
 	 */
 	public AutoParkDesign() {
+		Arrays.fill(labelEmpty, false);
 		initialize();
+	}
+	
+	public boolean getLabelEmpty(int i) {
+		return labelEmpty[i];
+	}
+
+	public void setLabelEmpty(int i,boolean bool) {
+		this.labelEmpty[i] = bool;
 	}
 
 	/**
@@ -114,16 +129,6 @@ public class AutoParkDesign {
 		buttonGroup.add(regularCheck);
 		buttonGroup.add(officialCheck);
 		buttonGroup.add(subscribedCheck);
-		
-		JLabel slotLabel1 = new JLabel("Slot1");
-		slotLabel1.setBackground(Color.WHITE);
-		slotLabel1.setHorizontalAlignment(SwingConstants.CENTER);
-		slotLabel1.setBounds(0, 260, 175, 175);
-		frame.getContentPane().add(slotLabel1);
-		
-		JButton exitButton1 = new JButton("Exit");
-		exitButton1.setBounds(40, 446, 90, 30);
-		frame.getContentPane().add(exitButton1);
 		
 		JLabel enterDateLabel = new JLabel("Enter Date-->");
 		enterDateLabel.setBounds(10, 40, 77, 14);
@@ -185,6 +190,21 @@ public class AutoParkDesign {
 		warningText.setBounds(783, 0, 175, 118);
 		frame.getContentPane().add(warningText);
 		
+		JLabel slotLabel1 = new JLabel("Slot1");
+		slotLabel1.setBackground(Color.WHITE);
+		slotLabel1.setHorizontalAlignment(SwingConstants.CENTER);
+		slotLabel1.setBounds(0, 260, 175, 175);
+		frame.getContentPane().add(slotLabel1);
+		frame.getContentPane().add(slotLabel1);
+		frame.getContentPane().add(slotLabel1);
+		frame.getContentPane().add(slotLabel1);
+		frame.getContentPane().add(slotLabel1);
+		frame.getContentPane().add(slotLabel1);
+		
+		JButton exitButton1 = new JButton("Exit");
+		exitButton1.setBounds(40, 446, 90, 30);
+		frame.getContentPane().add(exitButton1);
+		
 		JLabel slotLabel2 = new JLabel("Slot2");
 		slotLabel2.setBackground(Color.WHITE);
 		slotLabel2.setHorizontalAlignment(SwingConstants.CENTER);
@@ -228,25 +248,24 @@ public class AutoParkDesign {
 		
 		Image im1 = new ImageIcon(this.getClass().getResource("/1.png")).getImage();
 		slotLabel1.setIcon(new ImageIcon(im1));
-		frame.getContentPane().add(slotLabel1);
 		Image im2 = new ImageIcon(this.getClass().getResource("/2.png")).getImage();
 		slotLabel2.setIcon(new ImageIcon(im2));
-		frame.getContentPane().add(slotLabel1);
 		Image im3 = new ImageIcon(this.getClass().getResource("/3.png")).getImage();
 		slotLabel3.setIcon(new ImageIcon(im3));
-		frame.getContentPane().add(slotLabel1);
 		Image im4 = new ImageIcon(this.getClass().getResource("/4.png")).getImage();
 		slotLabel4.setIcon(new ImageIcon(im4));
-		frame.getContentPane().add(slotLabel1);
 		Image im5 = new ImageIcon(this.getClass().getResource("/5.png")).getImage();
 		slotLabel5.setIcon(new ImageIcon(im5));
-		frame.getContentPane().add(slotLabel1);
+		
+		buttonGroup2.add(exitButton1);
+		buttonGroup2.add(exitButton2);
+		buttonGroup2.add(exitButton3);
+		buttonGroup2.add(exitButton4);
+		buttonGroup2.add(exitButton5);
+				
 		
 		carPlateText.setToolTipText("Vehicle plate format must not empty and it's length must be bigger equal than 8 and smaller equal than 10");
-		
-		JPanel panel = new JPanel();
-		panel.setBounds(0, 260, 575, 508);
-		frame.getContentPane().add(panel);
+
 		
 		Date enterDate = new Date(0, 0, 0);
 		Date exitDate = new Date(0, 0, 0);
@@ -323,6 +342,8 @@ public class AutoParkDesign {
 		
 		Time enterTime = new Time(0, 0);
 		Time exitTime = new Time(0,0);
+		
+
 	
 		enterTimeCombo.addActionListener(new ActionListener() {
 			
@@ -388,12 +409,15 @@ public class AutoParkDesign {
 		
 		
 		AutoPark HalilAutoPark = new AutoPark(10.0, 5);
+		RegularVehicle aRegularVehicle = new RegularVehicle("");
+		OfficialVehicle aOfficialVehicle = new OfficialVehicle("");
+		SubscribedVehicle aSubscribedVehicle = new SubscribedVehicle("", null);
 		
 		
 		enterButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				int i = 0;
 				if((carPlateText.getText() != null)  && (carPlateText.getText().length()>=8 &&	 carPlateText.getText().length()<=10) )
 				{
 					String plate = carPlateText.getText();
@@ -402,38 +426,57 @@ public class AutoParkDesign {
 					{
 						if(regularCheck.isSelected())
 						{
-							RegularVehicle aRegularVehicle = new RegularVehicle(plate);
+							aRegularVehicle.setPlate(plate);
 							if(HalilAutoPark.vehicleEnters(plate, enterTime, false))
 							{
-								JLabel slotLabel1 = new JLabel("Slot1");
-								//for(JLabel aLabel : )
+								System.out.println("panpi");
+								while(labelEmpty[i] == true)
+								{
+									i++;
+									System.out.println(i);
+								}
+								switch (i) {
+								case 0:
+									Image im10 = new ImageIcon(this.getClass().getResource("/tesla.png")).getImage();
+									slotLabel1.setIcon(new ImageIcon(im10));
+									setLabelEmpty(0, true);
+									break;
+								case 1:
+									Image im11 = new ImageIcon(this.getClass().getResource("/tesla.png")).getImage();
+									slotLabel2.setIcon(new ImageIcon(im11));
+									setLabelEmpty(1, true);
+									break;
+									
+								case 2:
+									Image im12 = new ImageIcon(this.getClass().getResource("/tesla.png")).getImage();
+									slotLabel3.setIcon(new ImageIcon(im12));
+									setLabelEmpty(2, true);
+									break;
+								case 3:
+									Image im13 = new ImageIcon(this.getClass().getResource("/tesla.png")).getImage();
+									slotLabel4.setIcon(new ImageIcon(im13));
+									setLabelEmpty(3, true);
+									break;
+								case 4:
+									Image im14 = new ImageIcon(this.getClass().getResource("/tesla.png")).getImage();
+									slotLabel5.setIcon(new ImageIcon(im14));
+									setLabelEmpty(4, true);
+									break;
+								default:
+									break;
 							}
 							
-							String message = "Your vehicle has been created.Features: "+"\n";
-							message += "";
-							JOptionPane.showMessageDialog(new JFrame(), message, "Plate date/time error",JOptionPane.INFORMATION_MESSAGE);
+							String message = "[ADDED]!Your vehicle has been created." + "\n";
+							JOptionPane.showMessageDialog(new JFrame(), message, "CONGRATULATIONS!",JOptionPane.INFORMATION_MESSAGE);
+							
 						}
 						else if(officialCheck.isSelected())
 						{
-							officialCheck.addItemListener(new ItemListener() {
-								
-								@Override
-								public void itemStateChanged(ItemEvent e) {
-									OfficialVehicle aOfficialVehicle = new OfficialVehicle(plate);
-									
-								}
-							});
+							
 						}
 						else if(subscribedCheck.isSelected())
 						{
-							subscribedCheck.addItemListener(new ItemListener() {
-								
-								@Override
-								public void itemStateChanged(ItemEvent e) {
-									//SubscribedVehicle aSubscribedVehicle = new SubscribedVehicle(plate, subscriptions );
-									
-								}
-							});
+							
 						}
 						else 
 						{
@@ -452,8 +495,35 @@ public class AutoParkDesign {
 					String message = "Please, you give wrong vehicle plate format.Please, enter a valid vehicle plate format.To check right format look at the hint ";
 					JOptionPane.showMessageDialog(new JFrame(), message, "Plate format error",JOptionPane.ERROR_MESSAGE);				
 				}	
-			}	
+			}
+			}
+		
 		});
-
+	
+		exitButton1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(labelEmpty[0] == true)
+				{	
+					if(HalilAutoPark.vehicleEnters(HalilAutoPark.getParkRecords().get(0).getVehicle().getPlate(), HalilAutoPark.getParkRecords().get(0).getEnterTime(), 
+							HalilAutoPark.getParkRecords().get(0).getVehicle().isOfficial()))
+					{
+						String message = "Vehicle with this plate: " + HalilAutoPark.getParkRecords().get(0).getVehicle().getPlate() + " exiting from the autopark.";
+						message = "\n" + "Vehicle park fee is: " + HalilAutoPark.getHourlyFee();
+						JOptionPane.showMessageDialog(new JFrame(), message, "Plate format error",JOptionPane.INFORMATION_MESSAGE);	
+					}
+					
+					
+				}
+				else
+				{
+					String message = "Please, add some vehicle at first.";
+					JOptionPane.showMessageDialog(new JFrame(), message, "Empty slot Error",JOptionPane.ERROR_MESSAGE);
+				}
+				
+			}
+		});
 	}
+		
 }
