@@ -103,7 +103,6 @@ public class AutoPark {
 				
 				subscribedVehicles.add(aVehicle);
 				this.capacity--;
-				System.out.println("naptýn");
 				return true;
 			}
 		}
@@ -112,6 +111,7 @@ public class AutoPark {
 	
 	public boolean vehicleEnters(String plate, Time enter, boolean isOfficial)
 	{
+		System.out.println("enters"+ isOfficial);
 		if(plate != null && enter != null)
 		{
 			if(!isParked(plate))
@@ -165,20 +165,20 @@ public class AutoPark {
 							{
 								if(parkRecords.get(i).getVehicle().getSubscriptions().isValid() == true)
 								{	
+									System.out.println("exits"+parkRecords.get(i).getVehicle().isOfficial());
 									if(parkRecords.get(i).getVehicle().isOfficial() == false)
 									{
-										incomeDaily += Math.abs((hourlyFee * parkRecords.get(i).getParkingDuration()));
+										incomeDaily = Math.abs((hourlyFee * parkRecords.get(i).getParkingDuration()));
 									}
 									else
 									{
-										this.incomeDaily=0;
-										this.hourlyFee=0;
+											setIncomeDaily(0.0);
 									}
 								}
 							}
 							else
 							{
-								incomeDaily += Math.abs((hourlyFee * parkRecords.get(i).getParkingDuration()));
+								incomeDaily = Math.abs((hourlyFee * parkRecords.get(i).getParkingDuration()));
 							}
 							parkRecords.remove(parkRecords.get(i).getVehicle());
 							return true;

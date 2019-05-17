@@ -146,4 +146,5 @@ public class AutoParkTest extends TestCase {
 		assertEquals(20.0, autoPark.getIncomeDaily());
 	}
 
+	
 }

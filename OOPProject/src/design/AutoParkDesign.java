@@ -21,7 +21,6 @@ import oop.RegularVehicle;
 import oop.SubscribedVehicle;
 import oop.Subscription;
 import oop.Time;
-import oop.Vehicle;
 
 import javax.swing.JTextArea;
 import javax.swing.JOptionPane;
@@ -405,8 +404,11 @@ public class AutoParkDesign {
 		AutoPark HalilAutoPark = new AutoPark(10.0, 5);
 		RegularVehicle aRegularVehicle = new RegularVehicle("");
 		OfficialVehicle aOfficialVehicle = new OfficialVehicle("");
-		SubscribedVehicle aSubscribedVehicle = new SubscribedVehicle("", null);
-	
+		Date end = new Date(0,0,0);
+		Date begin = new Date(0,0,0);
+		Subscription sb1 = new Subscription(end, begin, "");
+		SubscribedVehicle aSubscribedVehicle = new SubscribedVehicle("", sb1);
+
 		enterButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -427,7 +429,6 @@ public class AutoParkDesign {
 								while(labelEmpty[i] == true)
 								{
 									i++;
-									System.out.println(i);
 								}
 								switch (i) {
 								case 0:
@@ -467,12 +468,12 @@ public class AutoParkDesign {
 						else if(officialCheck.isSelected())
 						{
 							aOfficialVehicle.setPlate(plate);
-							if(HalilAutoPark.vehicleEnters(plate, enterTime, false))
+							aOfficialVehicle.setOfficial(true);
+							if(HalilAutoPark.vehicleEnters(plate, enterTime, true))
 							{
 								while(labelEmpty[i] == true)
 								{
 									i++;
-									System.out.println(i);
 								}
 								switch (i) {
 								case 0:
@@ -502,6 +503,7 @@ public class AutoParkDesign {
 									setLabelEmpty(4, true);
 									break;
 								default:
+									aOfficialVehicle.setOfficial(true);
 									break;
 							}
 							
@@ -517,7 +519,6 @@ public class AutoParkDesign {
 								while(labelEmpty[i] == true)
 								{
 									i++;
-									System.out.println(i);
 								}
 								switch (i) {
 								case 0:
