@@ -28,6 +28,12 @@ public class Time {
 	{
 		return other.hour-this.hour;
 	}
+
+	@Override
+	public String toString() {
+		return "Time [hour=" + hour + ", minute=" + minute + "]";
+	}
+	
 	
 
 }

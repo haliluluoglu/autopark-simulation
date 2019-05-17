@@ -103,6 +103,7 @@ public class AutoPark {
 				
 				subscribedVehicles.add(aVehicle);
 				this.capacity--;
+				System.out.println("naptýn");
 				return true;
 			}
 		}
@@ -147,36 +148,41 @@ public class AutoPark {
 	
 	public boolean vehicleExits(String plate, Time exit)
 	{
-		if(plate != null && exit != null)
+		
+		if(plate != null && exit !=null)
 		{
 			if(isParked(plate))
 			{	
-				for(ParkRecord aRecord : parkRecords)
+				for(int i=0; i<parkRecords.size(); i++)
 				{
-					if(aRecord.getVehicle().getPlate().compareTo(plate) == 0 )
-					{	
-						aRecord.setExitTime(exit);
-						if(aRecord.getVehicle().getSubscriptions() != null)
-						{
-							if(aRecord.getVehicle().getSubscriptions().isValid() == true)
+					if(parkRecords.get(i) != null)
+					{
+						if(parkRecords.get(i).getVehicle().getPlate().compareTo(plate) == 0 )
+						{	
+							parkRecords.get(i).setExitTime(exit);
+							
+							if(parkRecords.get(i).getVehicle().getSubscriptions() != null)
 							{
-								if(aRecord.getVehicle().isOfficial() == false)
-								{
-									incomeDaily += Math.abs((hourlyFee * aRecord.getParkingDuration()));
-								}
-								else
-								{
-									this.incomeDaily=0;
-									this.hourlyFee=0;
+								if(parkRecords.get(i).getVehicle().getSubscriptions().isValid() == true)
+								{	
+									if(parkRecords.get(i).getVehicle().isOfficial() == false)
+									{
+										incomeDaily += Math.abs((hourlyFee * parkRecords.get(i).getParkingDuration()));
+									}
+									else
+									{
+										this.incomeDaily=0;
+										this.hourlyFee=0;
+									}
 								}
 							}
+							else
+							{
+								incomeDaily += Math.abs((hourlyFee * parkRecords.get(i).getParkingDuration()));
+							}
+							parkRecords.remove(parkRecords.get(i).getVehicle());
+							return true;
 						}
-						else
-						{
-							incomeDaily += Math.abs((hourlyFee * aRecord.getParkingDuration()));
-						}
-						parkRecords.remove(aRecord);
-						return true;
 					}
 				}
 			}
@@ -195,6 +201,5 @@ public class AutoPark {
 		return "AutoPark [subscribedVehicles=" + subscribedVehicles + ", parkRecords=" + parkRecords + ", hourlyFee="
 				+ hourlyFee + ", incomeDaily=" + incomeDaily + ", capacity=" + capacity + "]";
 	}
-	
 	
 }

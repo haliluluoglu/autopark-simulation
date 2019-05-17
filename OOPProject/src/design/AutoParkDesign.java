@@ -12,7 +12,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
+
 
 import oop.AutoPark;
 import oop.Date;
@@ -21,6 +21,7 @@ import oop.RegularVehicle;
 import oop.SubscribedVehicle;
 import oop.Subscription;
 import oop.Time;
+import oop.Vehicle;
 
 import javax.swing.JTextArea;
 import javax.swing.JOptionPane;
@@ -28,12 +29,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.ArrayList;
 import java.util.Arrays;
-
-import javax.swing.JPanel;
 
 public class AutoParkDesign {
 
@@ -343,8 +339,6 @@ public class AutoParkDesign {
 		Time enterTime = new Time(0, 0);
 		Time exitTime = new Time(0,0);
 		
-
-	
 		enterTimeCombo.addActionListener(new ActionListener() {
 			
 			@Override
@@ -384,7 +378,7 @@ public class AutoParkDesign {
 				{
 					exitTimeCombo.removeAllItems();
 					exitTimeCombo.addItem("13:45");
-					enterTime.setHour(5);
+					enterTime.setHour(05);
 					enterTime.setMinute(55);
 					
 					exitTime.setHour(13);
@@ -412,8 +406,7 @@ public class AutoParkDesign {
 		RegularVehicle aRegularVehicle = new RegularVehicle("");
 		OfficialVehicle aOfficialVehicle = new OfficialVehicle("");
 		SubscribedVehicle aSubscribedVehicle = new SubscribedVehicle("", null);
-		
-		
+	
 		enterButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -422,14 +415,15 @@ public class AutoParkDesign {
 				{
 					String plate = carPlateText.getText();
 					
-					if(enterDateCombo.getSelectedItem() != null && exitDateCombo.getSelectedItem() != null && enterTimeCombo.getSelectedItem() !=null && exitTimeCombo.getSelectedItem() != null)
+					if(enterDateCombo.getSelectedItem() != null && exitDateCombo.getSelectedItem() != null && 
+							enterTimeCombo.getSelectedItem() !=null && exitTimeCombo.getSelectedItem() != null)
 					{
 						if(regularCheck.isSelected())
 						{
 							aRegularVehicle.setPlate(plate);
+							
 							if(HalilAutoPark.vehicleEnters(plate, enterTime, false))
 							{
-								System.out.println("panpi");
 								while(labelEmpty[i] == true)
 								{
 									i++;
@@ -468,15 +462,97 @@ public class AutoParkDesign {
 							
 							String message = "[ADDED]!Your vehicle has been created." + "\n";
 							JOptionPane.showMessageDialog(new JFrame(), message, "CONGRATULATIONS!",JOptionPane.INFORMATION_MESSAGE);
-							
 						}
+					}
 						else if(officialCheck.isSelected())
 						{
+							aOfficialVehicle.setPlate(plate);
+							if(HalilAutoPark.vehicleEnters(plate, enterTime, false))
+							{
+								while(labelEmpty[i] == true)
+								{
+									i++;
+									System.out.println(i);
+								}
+								switch (i) {
+								case 0:
+									Image im10 = new ImageIcon(this.getClass().getResource("/police.png")).getImage();
+									slotLabel1.setIcon(new ImageIcon(im10));
+									setLabelEmpty(0, true);
+									break;
+								case 1:
+									Image im11 = new ImageIcon(this.getClass().getResource("/police.png")).getImage();
+									slotLabel2.setIcon(new ImageIcon(im11));
+									setLabelEmpty(1, true);
+									break;
+									
+								case 2:
+									Image im12 = new ImageIcon(this.getClass().getResource("/police.png")).getImage();
+									slotLabel3.setIcon(new ImageIcon(im12));
+									setLabelEmpty(2, true);
+									break;
+								case 3:
+									Image im13 = new ImageIcon(this.getClass().getResource("/police.png")).getImage();
+									slotLabel4.setIcon(new ImageIcon(im13));
+									setLabelEmpty(3, true);
+									break;
+								case 4:
+									Image im14 = new ImageIcon(this.getClass().getResource("/police.png")).getImage();
+									slotLabel5.setIcon(new ImageIcon(im14));
+									setLabelEmpty(4, true);
+									break;
+								default:
+									break;
+							}
 							
+							String message = "[ADDED]!Your vehicle has been created." + "\n";
+							JOptionPane.showMessageDialog(new JFrame(), message, "CONGRATULATIONS!",JOptionPane.INFORMATION_MESSAGE);
+							}
 						}
 						else if(subscribedCheck.isSelected())
 						{
+							aSubscribedVehicle.setPlate(plate);
+							if(HalilAutoPark.vehicleEnters(plate, enterTime, false))
+							{
+								while(labelEmpty[i] == true)
+								{
+									i++;
+									System.out.println(i);
+								}
+								switch (i) {
+								case 0:
+									Image im10 = new ImageIcon(this.getClass().getResource("/subscribed.png")).getImage();
+									slotLabel1.setIcon(new ImageIcon(im10));
+									setLabelEmpty(0, true);
+									break;
+								case 1:
+									Image im11 = new ImageIcon(this.getClass().getResource("/subscribed.png")).getImage();
+									slotLabel2.setIcon(new ImageIcon(im11));
+									setLabelEmpty(1, true);
+									break;
+									
+								case 2:
+									Image im12 = new ImageIcon(this.getClass().getResource("/subscribed.png")).getImage();
+									slotLabel3.setIcon(new ImageIcon(im12));
+									setLabelEmpty(2, true);
+									break;
+								case 3:
+									Image im13 = new ImageIcon(this.getClass().getResource("/subscribed.png")).getImage();
+									slotLabel4.setIcon(new ImageIcon(im13));
+									setLabelEmpty(3, true);
+									break;
+								case 4:
+									Image im14 = new ImageIcon(this.getClass().getResource("/subscribed.png")).getImage();
+									slotLabel5.setIcon(new ImageIcon(im14));
+									setLabelEmpty(4, true);
+									break;
+								default:
+									break;
+							}
 							
+							String message = "[ADDED]!Your vehicle has been created." + "\n";
+							JOptionPane.showMessageDialog(new JFrame(), message, "CONGRATULATIONS!",JOptionPane.INFORMATION_MESSAGE);
+							}
 						}
 						else 
 						{
@@ -495,26 +571,29 @@ public class AutoParkDesign {
 					String message = "Please, you give wrong vehicle plate format.Please, enter a valid vehicle plate format.To check right format look at the hint ";
 					JOptionPane.showMessageDialog(new JFrame(), message, "Plate format error",JOptionPane.ERROR_MESSAGE);				
 				}	
-			}
+		
 			}
 		
 		});
 	
+		
 		exitButton1.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String plate = HalilAutoPark.getParkRecords().get(0).getVehicle().getPlate();
 				if(labelEmpty[0] == true)
 				{	
-					if(HalilAutoPark.vehicleEnters(HalilAutoPark.getParkRecords().get(0).getVehicle().getPlate(), HalilAutoPark.getParkRecords().get(0).getEnterTime(), 
-							HalilAutoPark.getParkRecords().get(0).getVehicle().isOfficial()))
+					if(HalilAutoPark.vehicleExits(plate,exitTime))
 					{
 						String message = "Vehicle with this plate: " + HalilAutoPark.getParkRecords().get(0).getVehicle().getPlate() + " exiting from the autopark.";
-						message = "\n" + "Vehicle park fee is: " + HalilAutoPark.getHourlyFee();
-						JOptionPane.showMessageDialog(new JFrame(), message, "Plate format error",JOptionPane.INFORMATION_MESSAGE);	
+						message = "\n" + "Vehicle hourly fee is: " + HalilAutoPark.getHourlyFee();
+						message = "\n" + "Vehicle park fee is: " + HalilAutoPark.getIncomeDaily();
+						Image image1 = new ImageIcon(this.getClass().getResource("/1.png")).getImage();
+						slotLabel1.setIcon(new ImageIcon(image1));
+						setLabelEmpty(0,false);
+						JOptionPane.showMessageDialog(new JFrame(), message, "Plate format error",JOptionPane.INFORMATION_MESSAGE);
 					}
-					
-					
 				}
 				else
 				{
@@ -524,6 +603,115 @@ public class AutoParkDesign {
 				
 			}
 		});
-	}
 		
+		exitButton2.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String plate = HalilAutoPark.getParkRecords().get(1).getVehicle().getPlate();
+				if(labelEmpty[1] == true)
+				{	
+					if(HalilAutoPark.vehicleExits(plate,exitTime))
+					{
+						String message = "Vehicle with this plate: " + HalilAutoPark.getParkRecords().get(1).getVehicle().getPlate() + " exiting from the autopark.";
+						message = "\n" + "Vehicle hourly fee is: " + HalilAutoPark.getHourlyFee();
+						message = "\n" + "Vehicle park fee is: " + HalilAutoPark.getIncomeDaily();
+						Image image2 = new ImageIcon(this.getClass().getResource("/2.png")).getImage();
+						slotLabel2.setIcon(new ImageIcon(image2));
+						setLabelEmpty(1,false);
+						JOptionPane.showMessageDialog(new JFrame(), message, "Plate format error",JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+				else
+				{
+					String message = "Please, add some vehicle at first.";
+					JOptionPane.showMessageDialog(new JFrame(), message, "Empty slot Error",JOptionPane.ERROR_MESSAGE);
+				}
+				
+			}
+		});
+		
+		exitButton3.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String plate = HalilAutoPark.getParkRecords().get(2).getVehicle().getPlate();
+				if(labelEmpty[2] == true)
+				{	
+					if(HalilAutoPark.vehicleExits(plate,exitTime))
+					{
+						String message = "Vehicle with this plate: " + HalilAutoPark.getParkRecords().get(2).getVehicle().getPlate() + " exiting from the autopark.";
+						message = "\n" + "Vehicle hourly fee is: " + HalilAutoPark.getHourlyFee();
+						message = "\n" + "Vehicle park fee is: " + HalilAutoPark.getIncomeDaily();
+						Image image3 = new ImageIcon(this.getClass().getResource("/3.png")).getImage();
+						slotLabel3.setIcon(new ImageIcon(image3));
+						setLabelEmpty(2,false);
+						JOptionPane.showMessageDialog(new JFrame(), message, "Plate format error",JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+				else
+				{
+					String message = "Please, add some vehicle at first.";
+					JOptionPane.showMessageDialog(new JFrame(), message, "Empty slot Error",JOptionPane.ERROR_MESSAGE);
+				}
+				
+			}
+		});
+
+	exitButton4.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String plate = HalilAutoPark.getParkRecords().get(3).getVehicle().getPlate();
+			if(labelEmpty[3] == true)
+			{	
+				if(HalilAutoPark.vehicleExits(plate,exitTime))
+				{
+					String message = "Vehicle with this plate: " + HalilAutoPark.getParkRecords().get(3).getVehicle().getPlate() + " exiting from the autopark.";
+					message = "\n" + "Vehicle hourly fee is: " + HalilAutoPark.getHourlyFee();
+					message = "\n" + "Vehicle park fee is: " + HalilAutoPark.getIncomeDaily();
+					Image image4 = new ImageIcon(this.getClass().getResource("/4.png")).getImage();
+					slotLabel4.setIcon(new ImageIcon(image4));
+					setLabelEmpty(3,false);
+					JOptionPane.showMessageDialog(new JFrame(), message, "Plate format error",JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+			else
+			{
+				String message = "Please, add some vehicle at first.";
+				JOptionPane.showMessageDialog(new JFrame(), message, "Empty slot Error",JOptionPane.ERROR_MESSAGE);
+			}
+			
+		}
+	});
+
+	exitButton5.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String plate = HalilAutoPark.getParkRecords().get(4).getVehicle().getPlate();
+			if(labelEmpty[4] == true)
+			{	
+				if(HalilAutoPark.vehicleExits(plate,exitTime))
+				{
+					String message = "Vehicle with this plate: " + HalilAutoPark.getParkRecords().get(4).getVehicle().getPlate() + " exiting from the autopark.";
+					message = "\n" + "Vehicle hourly fee is: " + HalilAutoPark.getHourlyFee();
+					message = "\n" + "Vehicle park fee is: " + HalilAutoPark.getIncomeDaily();
+					Image image5 = new ImageIcon(this.getClass().getResource("/5.png")).getImage();
+					slotLabel5.setIcon(new ImageIcon(image5));
+					setLabelEmpty(4,false);
+					JOptionPane.showMessageDialog(new JFrame(), message, "Plate format error",JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+			else
+			{
+				String message = "Please, add some vehicle at first.";
+				JOptionPane.showMessageDialog(new JFrame(), message, "Empty slot Error",JOptionPane.ERROR_MESSAGE);
+			}
+			
+		}
+	});
+
+		
+	}
 }

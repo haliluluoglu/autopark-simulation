@@ -41,4 +41,11 @@ public class ParkRecord {
 	{
 		return exitTime.getDifference(enterTime);
 	}
+
+	@Override
+	public String toString() {
+		return "ParkRecord [enterTime=" + enterTime + ", exitTime=" + exitTime + ", vehicle=" + vehicle + "]";
+	}
+	
+	
 }
