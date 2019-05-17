@@ -5,10 +5,9 @@ public class SubscribedVehicle implements Vehicle{
 	private Subscription subscriptions;
 	private boolean official=false;
 	
-	public SubscribedVehicle(String plate, Subscription subscriptions, boolean official) {
+	public SubscribedVehicle(String plate, Subscription subscriptions) {
 		this.plate = plate;
 		this.subscriptions = subscriptions;
-		this.official = official;
 	}
 
 	public String getPlate() {

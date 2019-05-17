@@ -52,7 +52,7 @@ public class AutoParkTest extends TestCase {
 		Date end1 = new Date(2020, 10, 10);
 		Date begin1 = new Date(2020, 10, 15);
 		Subscription sub1 = new Subscription(end1, begin1, "34 HIU 01");
-		SubscribedVehicle subVehicle1 = new SubscribedVehicle("34 HIU 01", sub1, false);
+		SubscribedVehicle subVehicle1 = new SubscribedVehicle("34 HIU 01", sub1);
 		
 		autoPark.addVehicle(subVehicle1);
 		assertEquals(subVehicle1, autoPark.searchVehicle(subVehicle1.getPlate()));
@@ -63,7 +63,7 @@ public class AutoParkTest extends TestCase {
 		Date end1 = new Date(2020, 10, 10);
 		Date begin1 = new Date(2020, 10, 15);
 		Subscription sub1 = new Subscription(end1, begin1, "345 HIU 012");
-		SubscribedVehicle subVehicle1 = new SubscribedVehicle("345 HIU 012", sub1, false);
+		SubscribedVehicle subVehicle1 = new SubscribedVehicle("345 HIU 012", sub1);
 		
 		autoPark.addVehicle(subVehicle1);
 		assertEquals(null, autoPark.searchVehicle(subVehicle1.getPlate()));
@@ -74,7 +74,7 @@ public class AutoParkTest extends TestCase {
 		Date end1 = new Date(2020, 10, 10);
 		Date begin1 = new Date(2020, 10, 15);
 		Subscription sub1 = new Subscription(end1, begin1, "34 HIU 01");
-		SubscribedVehicle subVehicle1 = new SubscribedVehicle("34 HIU 01", sub1, false);
+		SubscribedVehicle subVehicle1 = new SubscribedVehicle("34 HIU 01", sub1);
 		
 		autoPark.addVehicle(subVehicle1);
 		assertEquals(subVehicle1, autoPark.searchVehicle(subVehicle1.getPlate()));
@@ -85,11 +85,11 @@ public class AutoParkTest extends TestCase {
 			Date end1 = new Date(2020, 10, 10);
 			Date begin1 = new Date(2020, 10, 15);
 			Subscription sub1 = new Subscription(end1, begin1, "34 HIU 01");
-			SubscribedVehicle subVehicle1 = new SubscribedVehicle("34 HIU 01", sub1, false);
-			SubscribedVehicle subVehicle2 = new SubscribedVehicle("34 HIU 02", sub1, false);
-			SubscribedVehicle subVehicle3 = new SubscribedVehicle("34 HIU 03", sub1, false);
-			SubscribedVehicle subVehicle4 = new SubscribedVehicle("34 HIU 04", sub1, false);
-			SubscribedVehicle subVehicle5 = new SubscribedVehicle("34 HIU 05", sub1, false);
+			SubscribedVehicle subVehicle1 = new SubscribedVehicle("34 HIU 01", sub1);
+			SubscribedVehicle subVehicle2 = new SubscribedVehicle("34 HIU 02", sub1);
+			SubscribedVehicle subVehicle3 = new SubscribedVehicle("34 HIU 03", sub1);
+			SubscribedVehicle subVehicle4 = new SubscribedVehicle("34 HIU 04", sub1);
+			SubscribedVehicle subVehicle5 = new SubscribedVehicle("34 HIU 05", sub1);
 			
 			autoPark.addVehicle(subVehicle1);
 			autoPark.addVehicle(subVehicle2);
@@ -106,7 +106,7 @@ public class AutoParkTest extends TestCase {
 		Date end1 = new Date(2020, 10, 10);
 		Date begin1 = new Date(2020, 10, 15);
 		Subscription sub1 = new Subscription(end1, begin1, "34 HIU 01");
-		SubscribedVehicle subVehicle1 = new SubscribedVehicle("34 HIU 01", sub1, false);
+		SubscribedVehicle subVehicle1 = new SubscribedVehicle("34 HIU 01", sub1);
 		
 		autoPark.addVehicle(subVehicle1);
 		

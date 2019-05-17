@@ -12,7 +12,7 @@ public class Subscription {
 				this.plate=plate;
 				this.end = end;
 				this.begin = begin;
-				vehicle =  new SubscribedVehicle(plate, this, false);
+				vehicle =  new SubscribedVehicle(plate, this);
 		
 		}
 	}
