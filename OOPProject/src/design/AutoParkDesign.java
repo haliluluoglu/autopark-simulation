@@ -29,6 +29,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
+import java.util.Random;
 
 public class AutoParkDesign {
 
@@ -74,7 +75,7 @@ public class AutoParkDesign {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame("Halil Ýbrahim Uluoðlu");
+		frame = new JFrame("Java project-Autopark simulation");
 		frame.setBounds(600, 100, 1037, 809);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -260,6 +261,21 @@ public class AutoParkDesign {
 				
 		
 		carPlateText.setToolTipText("Vehicle plate format must not empty and it's length must be bigger equal than 8 and smaller equal than 10");
+		
+		JButton halilbutton = new JButton("Halil Ýbrahim "+"\n"+"Uluoðlu");
+		halilbutton.setFont(new Font("Arial", Font.PLAIN, 25));
+		halilbutton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Random random = new Random();
+				Random random2= new Random();
+				Color color = new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256));
+				Color color2 = new Color(random2.nextInt(256), random2.nextInt(256), random.nextInt(256));
+				halilbutton.setForeground(color);
+				halilbutton.setBackground(color2);
+			}
+		});
+		halilbutton.setBounds(681, 431, 300, 248);
+		frame.getContentPane().add(halilbutton);
 
 		
 		Date enterDate = new Date(0, 0, 0);
